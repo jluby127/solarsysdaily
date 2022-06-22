@@ -37,7 +37,7 @@ def parseData(filelist):
         for d in datastrip:
             dataformatted.append(d)
 
-        datadict = {"JD":dataformatted[0], "RA":float(dataformatted[3]), "DEC":float(dataformatted[4]), "RANGE":float(dataformatted[5])}
+        datadict = {"RA":float(dataformatted[3]), "DEC":float(dataformatted[4]), "HELRANGE":float(dataformatted[5], "EARTHRANGE":float(dataformatted[7])}
         allplanets.append(datadict)
 
     return allplanets
@@ -49,7 +49,7 @@ def gen_ephem_today(yyyy='2022',mm='06',dd='22'):
     '''
     planets = [199,299,10,499,599,699,799,899]
     files = ['mercury','venus','earth','mars','jupiter','saturn','uranus','neptune']
-    
+
     date_in = '{}-'.format(int(yyyy))+mm+'-{}'.format(int(dd))
     date_next = '{}-'.format(int(yyyy))+mm+'-{}'.format(int(dd)+1)
     # year_next = '{}-'.format(y+1)+mm+'-{}'.format(d)
@@ -72,7 +72,7 @@ def gen_ephem_today(yyyy='2022',mm='06',dd='22'):
         f = open(files[i]+'.csv','w')
         f.write(data)
         f.close()
-        
+
     return parseData(files)
 
 
