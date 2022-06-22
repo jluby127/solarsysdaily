@@ -1,7 +1,11 @@
 # SysView
 # utility functions
+import requests
 import numpy as np
-
+import matplotlib.pyplot as plt
+import matplotlib as mpl
+import pandas as pd
+import os
 
 def parseData(filelist):
     '''
@@ -19,7 +23,7 @@ def parseData(filelist):
 
     for f in filelist:
         lines = []
-        with open(f,'r') as dataFile:
+        with open(f+'.csv','r') as dataFile:
             for line in dataFile:
                 line = line.strip()
                 lines.append(line)
@@ -38,7 +42,38 @@ def parseData(filelist):
 
     return allplanets
 
+def gen_ephem_today(yyyy='2022',mm='06',dd='22'):
+    '''
+    Input: Year, Month and Day as strings
+    Output: Ephemeris file for the day
+    '''
+    planets = [199,299,10,499,599,699,799,899]
+    files = ['mercury','venus','earth','mars','jupiter','saturn','uranus','neptune']
+    
+    date_in = '{}-'.format(int(yyyy))+mm+'-{}'.format(int(dd))
+    date_next = '{}-'.format(int(yyyy))+mm+'-{}'.format(int(dd)+1)
+    # year_next = '{}-'.format(y+1)+mm+'-{}'.format(d)
 
+
+    for i in range(8):
+        URL_pre = 'https://ssd.jpl.nasa.gov/api/horizons.api?format=text&'
+        planet = 'COMMAND=\'{}\'&'.format(planets[i])
+        ephem_setting = 'OBJ_DATA=\'YES\'&MAKE_EPHEM=\'YES\'&EPHEM_TYPE=\'OBSERVER\'&'
+        obs = 'CENTER=\'50\'&'
+        duration='START_TIME=\''+date_in+'\'&STOP_TIME=\''+date_next+'\'&STEP_SIZE=\'1%20d\'&'
+        data = 'QUANTITIES=\'2,19,20\'&'
+        ang = 'ANG_FORMAT=\'DEG\'&'
+        csv_format = 'CSV_FORMAT=\'YES\''
+        URL = str(URL_pre+planet+ephem_setting+obs+duration+data+ang+csv_format)
+        r = requests.get(url = URL)
+        data = r.content
+        data = data.decode()
+        type(data)
+        f = open(files[i]+'.csv','w')
+        f.write(data)
+        f.close()
+        
+    return parseData(files)
 
 
 # def isUP(allplanets):
