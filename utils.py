@@ -37,7 +37,7 @@ def parseData(filelist):
         for d in datastrip:
             dataformatted.append(d)
 
-        datadict = {"RA":float(dataformatted[3]), "DEC":float(dataformatted[4]), "HELRANGE":float(dataformatted[5], "EARTHRANGE":float(dataformatted[7])}
+        datadict = {"RA":float(dataformatted[3]), "DEC":float(dataformatted[4]), "HELRANGE":float(dataformatted[5]), "EARTHRANGE":float(dataformatted[7])}
         allplanets.append(datadict)
 
     return allplanets
