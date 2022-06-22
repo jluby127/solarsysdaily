@@ -76,6 +76,15 @@ def gen_ephem_today(yyyy='2022',mm='06',dd='22'):
     return parseData(files)
 
 
+PlanetDist = np.array([0.39, 0.72, 1, 1.52, 5.20, 9.58, 19.20, 30.05])
+#Define cosine calculation function \n",
+def CosCalc(ep):
+    costop = (np.sqrt(ep)-1-np.sqrt(PlanetDist))
+    cosbot = 2* PlanetDist
+    theta = np.arccos(costop/cosbot)
+    return theta
+
+
 # def isUP(allplanets):
 #     ups = []
 #     for i in range(len(allplanets)):
