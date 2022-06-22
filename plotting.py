@@ -73,7 +73,7 @@ def plotinner(allplanets, date):
 
     '''
     Only plot the inner 5 planets
-    
+
     Inputs:
         - allplanets (list of dictionaries) - Each planet gets a dictionary with its relevant information (JD, RA, DEC, RANGE),
                                               and each dictionary is stored in this list.
