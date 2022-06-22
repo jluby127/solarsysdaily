@@ -78,10 +78,11 @@ def gen_ephem_today(yyyy='2022',mm='06',dd='22'):
 
 PlanetDist = np.array([0.39, 0.72, 1, 1.52, 5.20, 9.58, 19.20, 30.05])
 #Define cosine calculation function \n",
-def CosCalc(ep):
-    costop = (ep**2-1-PlanetDist**2)
-    cosbot = 2*PlanetDist
+def CosCalc(ep, hp):
+    costop = (ep**2-1-hp**2)
+    cosbot = 2*hp
     theta = np.arccos(costop/cosbot)
+    theta *= (180/np.pi)
     return theta
 
 
