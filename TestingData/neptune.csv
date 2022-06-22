@@ -27,44 +27,44 @@ API SOURCE: NASA/JPL Horizons API
 
 
 *******************************************************************************
-Ephemeris / API_USER Tue Jun 21 15:17:01 2022 Pasadena, USA      / Horizons    
+Ephemeris / API_USER Wed Jun 22 15:15:19 2022 Pasadena, USA      / Horizons    
 *******************************************************************************
 Target body name: Neptune (899)                   {source: nep101_merged}
-Center body name: Sun (10)                        {source: DE441}
-Center-site name: BODYCENTRIC
+Center body name: Earth (399)                     {source: DE441}
+Center-site name: Stockholm (before 1931)
 *******************************************************************************
-Start time      : A.D. 2022-Jun-24 00:00:00.0000 UT      
-Stop  time      : A.D. 2022-Jun-25 00:00:00.0000 UT      
+Start time      : A.D. 2022-Jun-22 00:00:00.0000 UT      
+Stop  time      : A.D. 2022-Jun-23 00:00:00.0000 UT      
 Step-size       : 1440 minutes
 *******************************************************************************
 Target pole/equ : IAU_NEPTUNE                     {West-longitude positive}
 Target radii    : 24764.0 x 24764.0 x 24341.0 km  {Equator, meridian, pole}    
-Center geodetic : 0.00000000,0.00000000,0.0000000 {E-lon(deg),Lat(deg),Alt(km)}
-Center cylindric: 0.00000000,0.00000000,0.0000000 {E-lon(deg),Dxy(km),Dz(km)}
-Center pole/equ : IAU_SUN                         {East-longitude positive}
-Center radii    : 696000.0 x 696000.0 x 696000.0 k{Equator, meridian, pole}    
+Center geodetic : 18.0582000,59.3421921,0.0432294 {E-lon(deg),Lat(deg),Alt(km)}
+Center cylindric: 18.0582000,3260.38087,5463.5087 {E-lon(deg),Dxy(km),Dz(km)}
+Center pole/equ : ITRF93                          {East-longitude positive}
+Center radii    : 6378.1 x 6378.1 x 6356.8 km     {Equator, meridian, pole}    
 Target primary  : Sun
-Vis. interferer : None
-Rel. light bend : Sun                             {source: DE441}
-Rel. lght bnd GM: 1.3271E+11 km^3/s^2                                          
+Vis. interferer : MOON (R_eq= 1737.400) km        {source: DE441}
+Rel. light bend : Sun, EARTH                      {source: DE441}
+Rel. lght bnd GM: 1.3271E+11, 3.9860E+05 km^3/s^2                              
 Atmos refraction: NO (AIRLESS)
 RA format       : DEG
 Time format     : CAL 
-EOP file        : eop.220620.p220913                                           
-EOP coverage    : DATA-BASED 1962-JAN-20 TO 2022-JUN-20. PREDICTS-> 2022-SEP-12
+EOP file        : eop.220622.p220914                                           
+EOP coverage    : DATA-BASED 1962-JAN-20 TO 2022-JUN-22. PREDICTS-> 2022-SEP-13
 Units conversion: 1 au= 149597870.700 km, c= 299792.458 km/s, 1 day= 86400.0 s 
-Table cut-offs 1: Elevation (-90.0deg=NO ),Airmass     n.a.    , Daylight (NO )
+Table cut-offs 1: Elevation (-90.0deg=NO ),Airmass (>38.000=NO), Daylight (NO )
 Table cut-offs 2: Solar elongation (  0.0,180.0=NO ),Local Hour Angle( 0.0=NO )
 Table cut-offs 3: RA/DEC angular rate (     0.0=NO )                           
 Table format    : Comma Separated Values (spreadsheet)
-*******************************************************************************
- Date__(UT)__HR:MN, , , R.A._(ICRF), DEC_(ICRF),                r,       rdot,
-******************************************************************************
+**************************************************************************************************************
+ Date__(UT)__HR:MN, , ,R.A._(a-app), DEC_(a-app),                r,       rdot,             delta,     deldot,
+**************************************************************************************************************
 $$SOE
- 2022-Jun-24 00:00, , ,   354.21500,   -3.77758,   29.91673297442, -0.0366295,
- 2022-Jun-25 00:00, , ,   354.22063,   -3.77531,   29.91671180515, -0.0366773,
+ 2022-Jun-22 00:00,C,m,   356.27416,    -2.89410,   29.91677507411, -0.0365151,  29.8082353544291,-29.2624651,
+ 2022-Jun-23 00:00,C,m,   356.27736,    -2.89359,   29.91675396675, -0.0365702,  29.7914745106292,-29.2152541,
 $$EOE
-*******************************************************************************
+**************************************************************************************************************
 Column meaning:
  
 TIME
@@ -91,20 +91,45 @@ Julian calendar system. Later calendar dates are in the Gregorian system.
 
   NOTE: "n.a." in output means quantity "not available" at the print-time.
  
- 'R.A._(ICRF), DEC_(ICRF),' =
-  Astrometric right ascension and declination of the target center with
-respect to the observing site (coordinate origin) in the reference frame of
-the planetary ephemeris (ICRF). Compensated for down-leg light-time delay
-aberration.
+SOLAR PRESENCE (OBSERVING SITE)
+  Time tag is followed by a blank, then a solar-presence symbol:
 
-  Units: RA  in decimal degrees,  ddd.fffff{ffff}
-         DEC in decimal degrees,  sdd.fffff{ffff}
+       '*'  Daylight (refracted solar upper-limb on or above apparent horizon)
+       'C'  Civil twilight/dawn
+       'N'  Nautical twilight/dawn
+       'A'  Astronomical twilight/dawn
+       ' '  Night OR geocentric ephemeris
+
+LUNAR PRESENCE (OBSERVING SITE)
+  The solar-presence symbol is immediately followed by a lunar-presence symbol:
+
+       'm'  Refracted upper-limb of Moon on or above apparent horizon
+       ' '  Refracted upper-limb of Moon below apparent horizon OR geocentric
+            ephemeris
+ 
+ 'R.A._(a-app), DEC_(a-app),' =
+  Airless apparent right ascension and declination of the target center with
+respect to an instantaneous reference frame defined by the Earth equator of-dat
+(z-axis) and meridian containing the Earth equinox of-date (x-axis, EOP-correct
+IAU76/80). Compensated for down-leg light-time delay, gravitational deflection
+of light, stellar aberration, precession & nutation. Note: equinox (RA origin)
+is offset -53 mas from the of-date frame defined by the IAU06/00a P & N system.
+
+  Units: RA  in decimal degrees, ddd.fffff{ffff}
+         DEC in decimal degrees  sdd.fffff{ffff}
+
  
  'r,       rdot,' =
    The Sun's apparent range ("r", light-time aberrated) and range-rate ("rdot")
 relative to the target center, as seen by the observer. A positive "rdot" means
 the target center was moving away from the Sun, negative means moving toward
 the Sun.  Units: AU and KM/S
+ 
+ 'delta,     deldot,' =
+   Apparent range ("delta", light-time aberrated) and range-rate ("delta-dot")
+of the target center relative to the observer. A positive "deldot" means the
+target center is moving away from the observer, negative indicates movement
+toward the observer.  Units: AU and KM/S
 
 Computations by ...
 
@@ -123,4 +148,4 @@ Computations by ...
                   scripts        https://ssd.jpl.nasa.gov/ftp/ssd/SCRIPTS
     Author      : Jon.D.Giorgini@jpl.nasa.gov
 
-*******************************************************************************
+**************************************************************************************************************
