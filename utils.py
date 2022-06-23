@@ -43,9 +43,17 @@ def parseData(filelist):
     return allplanets
 
 def gen_ephem_today(yyyy='2022',mm='06',dd='22'):
-    '''
-    Input: Year, Month and Day as strings
-    Output: Ephemeris file for the day
+    '''Ephemeris generator for given date
+
+    Generates the equatorial coordinates and distance to a planet as observed from Earth, and its distance to the Sun.
+
+    Args: 
+	yyyy (string): Year in YYYY format
+	mm   (string): Month in MM format
+	dd   (string): Day in DD format
+
+    Output: 
+	list: A list of dictionaries each containing the Julian Date of observation, equatorial coordinates and heliocentric and geocentric distances
     '''
     planets = [199,299,10,499,599,699,799,899]
     files = ['mercury','venus','earth','mars','jupiter','saturn','uranus','neptune']
