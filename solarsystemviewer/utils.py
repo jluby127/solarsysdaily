@@ -15,10 +15,10 @@ def parseData(filelist):
     Args:
         filelist (array of strings): an array where each element is the name of the file pulled from Horizons for the ith planet
 
-    Returns:
-        allplanets (list of dictionaries): Each planet gets a dictionary with its relevant information
-                                            [RA, DEC, HELRANGE (Sun-Planet distance), EARTHRANGE (Earth-Planet distance)],
-                                            and each dictionary is stored in this list.
+    Returns: 
+        allplanets-- A list of dictionaries with each planet's relevant information [RA, DEC, HELRANGE (Sun-Planet distance), EARTHRANGE (Earth-Planet distance)],and each dictionary is stored in this list.
+    Return Type:
+        list
     """
     allplanets = []
 
@@ -38,29 +38,34 @@ def parseData(filelist):
         for d in datastrip:
             dataformatted.append(d)
 
-        datadict = {"RA":float(dataformatted[3]), "DEC":float(dataformatted[4]), "HELRANGE":float(dataformatted[5]), "EARTHRANGE":float(dataformatted[7])}
-        allplanets.append(datadict)
+        if f == 'earth':
+            datadict = {"RA":float(dataformatted[3]), "DEC":float(dataformatted[4]), "HELRANGE":float(dataformatted[7]), "EARTHRANGE":float(dataformatted[5])}
+            allplanets.append(datadict)
+        else:
+            datadict = {"RA":float(dataformatted[3]), "DEC":float(dataformatted[4]), "HELRANGE":float(dataformatted[5]), "EARTHRANGE":float(dataformatted[7])}
+            allplanets.append(datadict)
 
     return allplanets
 
-def gen_ephem_today(yyyy='2022',mm='06',dd='22'):
+def gen_ephem_today(date):
     '''Ephemeris generator for given date
 
     Generates the equatorial coordinates and distance to a planet as observed from Earth, and its distance to the Sun.
 
     Args: 
-	yyyy (string): Year in YYYY format
-	mm   (string): Month in MM format
-	dd   (string): Day in DD format
+	    date (string): Date to view the Solar System in YYYY-MM-DD format
 
-    Output: 
-	list: A list of dictionaries each containing the Julian Date of observation, equatorial coordinates and heliocentric and geocentric distances
+    Returns: 
+	    parseData(files)
+    Return Type:
+        list
     '''
     planets = [199,299,10,499,599,699,799,899]
     files = ['mercury','venus','earth','mars','jupiter','saturn','uranus','neptune']
-
-    date_in = '{}-'.format(int(yyyy))+mm+'-{}'.format(int(dd))
-    date_next = '{}-'.format(int(yyyy))+mm+'-{}'.format(int(dd)+1)
+    date_obs = date.split("-")
+    yyyy,mm,dd = int(date_obs[0]),date_obs[1],int(date_obs[2])
+    date_in = '{}-'.format(yyyy)+mm+'-{}'.format(dd)
+    date_next = '{}-'.format(yyyy)+mm+'-{}'.format(dd+1)
     # year_next = '{}-'.format(y+1)+mm+'-{}'.format(d)
 
 
@@ -86,26 +91,32 @@ def gen_ephem_today(yyyy='2022',mm='06',dd='22'):
 
 
 
-PlanetDist = np.array([0.39, 0.72, 1, 1.52, 5.20, 9.58, 19.20, 30.05])
+# PlanetDist = np.array([0.39, 0.72, 1, 1.52, 5.20, 9.58, 19.20, 30.05])
 #Define cosine calculation function \n",
-def CosCalc(ep, hp):
+def CosCalc(planetinfo):
     """ Cosine Angle Calculation
 
     Calculate the angle between earth-planet line and sun-planet line using cosine rules.
 
     Args:
-        ep(float): Number. The distance between the earth and the planet.
-        hp(float): Number. The distance between the sun and the planet. 
+        planetinfo: Dictionary. The dictionary of ephemeris information from gen_ephem_today
+        ep(float): Number. The distance between the earth and the planet (labelled 'EARTHRANGE' in dictionary).
+        hp(float): Number. The distance between the sun and the planet (labelled 'HELRANGE' in dictionary). 
     
     Returns: 
-        float: value of angle theta in radian 
+        list: values of angle theta in radian 
 
     """
-    costop = (ep**2-1-hp**2)
-    cosbot = 2*hp
-    theta = np.arccos(costop/cosbot)
-    theta *= (180/np.pi)
-    return theta
+    theta_all = []
+    for i in planetinfo: 
+        ep = i['EARTHRANGE']
+        hp = i['HELRANGE']
+        costop = (ep**2-1-hp**2)
+        cosbot = 2*hp
+        theta = np.arccos(costop/cosbot)
+        theta *= (180/np.pi)
+        theta_all.append(theta)
+    return theta_all
 
 
 # def isUP(allplanets):
