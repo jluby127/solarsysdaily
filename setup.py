@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 
 setup(
-	name=”SolarSystemViewer”,
-	version=”1.0.0”,
+	name='solar_system_viewer',
+	version='1.0.0',
 	packages=find_packages()
 )
