@@ -13,7 +13,6 @@ Welcome to SolarSystemViewer's documentation!
    utils.rst
    plotting.rst
 
-   genindex
 
 
 Indices and tables
