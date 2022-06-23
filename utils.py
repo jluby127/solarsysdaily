@@ -85,9 +85,22 @@ def gen_ephem_today(yyyy='2022',mm='06',dd='22'):
     return parseData(files)
 
 
+
 PlanetDist = np.array([0.39, 0.72, 1, 1.52, 5.20, 9.58, 19.20, 30.05])
 #Define cosine calculation function \n",
 def CosCalc(ep, hp):
+    """ Cosine Angle Calculation
+
+    Calculate the angle between earth-planet line and sun-planet line using cosine rules.
+
+    Args:
+        ep(float): Number. The distance between the earth and the planet.
+        hp(float): Number. The distance between the sun and the planet. 
+    
+    Returns: 
+        float: value of angle theta in radian 
+
+    """
     costop = (ep**2-1-hp**2)
     cosbot = 2*hp
     theta = np.arccos(costop/cosbot)
