@@ -17,8 +17,8 @@ def plotAll(allplanets, date, truedist=True):
         - date (string) - the user inputted date in question. Formatted as "YYYY-MM-DD".
         - truedist (boolean) - True if you want to see the true relative distances to the planets on the planet.
                                False if you want an evenly spaced system,
-    Outupts:
-        - None.
+    Returns
+        None
     '''
     pt.rcParams['axes.facecolor']='gray'
     fig, ax = pt.subplots(figsize=(12,12))
