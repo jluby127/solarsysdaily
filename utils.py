@@ -8,17 +8,18 @@ import pandas as pd
 import os
 
 def parseData(filelist):
-    '''
-    We pull all data from Horizons@JPFL (https://ssd.jpl.nasa.gov/horizons/app.html#/) but this data file is poorly formatted.
-    We use this function to extract only the data we are interested in, and in the format that works for us.
+    """ Parse Data
 
-    Inputs:
-        - filelist (list of strings) - a list of names for the files curled from Horizons which contain the information for each planet.
-                                       Each planet gets its own file, so this list should always have len(filelist) = 8.
-    Outputs:
-        - allplanets (list of dictionaries) - Each planet gets a dictionary with its relevant information (JD, RA, DEC, RANGE),
-                                              and each dictionary is stored in this list.
-    '''
+    Read and parse the relevant data from the Horizons@JPL (https://ssd.jpl.nasa.gov/horizons/app.html#/) curl command
+
+    Args:
+        filelist (array of strings): an array where each element is the name of the file pulled from Horizons for the ith planet
+
+    Returns:
+        allplanets (list of dictionaries): Each planet gets a dictionary with its relevant information
+                                            [RA, DEC, HELRANGE (Sun-Planet distance), EARTHRANGE (Earth-Planet distance)],
+                                            and each dictionary is stored in this list.
+    """
     allplanets = []
 
     for f in filelist:
