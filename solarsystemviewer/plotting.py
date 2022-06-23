@@ -6,7 +6,7 @@ import numpy as np
 pt.rcParams['axes.facecolor']='k'
 
 
-def plotAll(allplanets, date, truedist=True):
+def plotAll(allplanets, truedist=True):
 
     '''
     The main plotting function. Formatted the same each time, this displays the relative positions of all the planets at the user inputted timestamp.
@@ -14,12 +14,12 @@ def plotAll(allplanets, date, truedist=True):
     Inputs:
         - allplanets (list of dictionaries) - Each planet gets a dictionary with its relevant information (JD, RA, DEC, RANGE),
                                               and each dictionary is stored in this list.
-        - date (string) - the user inputted date in question. Formatted as "YYYY-MM-DD".
         - truedist (boolean) - True if you want to see the true relative distances to the planets on the planet.
                                False if you want an evenly spaced system,
     Outupts:
-        - None.
+        None
     '''
+    date = allplanets[0]['DATE']
     pt.rcParams['axes.facecolor']='gray'
     fig, ax = pt.subplots(figsize=(12,12))
     size2 = 15
@@ -69,20 +69,19 @@ def plotAll(allplanets, date, truedist=True):
     pt.show()
 
 
-def plotinner(allplanets, date):
+def plotinner(allplanets):
 
     '''
-    Only plot the inner 5 planets
-
-    Inputs:
-        - allplanets (list of dictionaries) - Each planet gets a dictionary with its relevant information (JD, RA, DEC, RANGE),
+     Args:
+        allplanets (list of dictionaries) - Each planet gets a dictionary with its relevant information (JD, RA, DEC, RANGE),
                                               and each dictionary is stored in this list.
-        - date (string) - the user inputted date in question. Formatted as "YYYY-MM-DD".
-        - truedist (boolean) - True if you want to see the true relative distances to the planets on the planet.
-                               False if you want an evenly spaced system,
-    Outupts:
-        - None.
+
+    Return:
+        None
+    Return Type:
+        NoneType
     '''
+    date = allplanets[0]['DATE']
     pt.rcParams['axes.facecolor']='gray'
     fig, ax = pt.subplots(figsize=(12,12))
     size2 = 15
@@ -118,13 +117,16 @@ def plotouter(allplanets, date):
     '''
     Only plot the outer 5 planets
 
-    Inputs:
-        - allplanets (list of dictionaries) - Each planet gets a dictionary with its relevant information (JD, RA, DEC, RANGE),
+    Args:
+        allplanets (list of dictionaries) - Each planet gets a dictionary with its relevant information (JD, RA, DEC, RANGE),
                                               and each dictionary is stored in this list.
-        - date (string) - the user inputted date in question. Formatted as "YYYY-MM-DD".
-    Outupts:
-        - None.
+
+    Return:
+        None
+    Return Type:
+        NoneType
     '''
+    date = allplanets[0]['DATE']
     pt.rcParams['axes.facecolor']='gray'
     fig, ax = pt.subplots(figsize=(12,12))
     size2 = 15
