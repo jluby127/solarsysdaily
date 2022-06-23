@@ -35,16 +35,16 @@ def plotAll(allplanets, date, truedist=True):
     if truedist:
         audist = 32
         for i in range(len(allplanets)):
-            pt.plot((allplanets[i]['RANGE']*np.cos(allplanets[i]['RA'])), (allplanets[i]['RANGE']*np.sin(allplanets[i]['RA'])), marker='o', color=cols[i], markeredgecolor='k', markersize=size3)
-            pt.plot([0,(allplanets[i]['RANGE']*np.cos(allplanets[i]['RA']))], [0, (allplanets[i]['RANGE']*np.sin(allplanets[i]['RA']))], marker='o', color=cols[i], markeredgecolor='k', markersize=0, linestyle='-')
-        ax.add_patch(mpl.patches.Circle((0, 0), radius=allplanets[0]['RANGE'], ec=cols[0], fill=False))
-        ax.add_patch(mpl.patches.Circle((0, 0), radius=allplanets[1]['RANGE'], ec=cols[1], fill=False))
-        ax.add_patch(mpl.patches.Circle((0, 0), radius=allplanets[2]['RANGE'], ec=cols[2], fill=False))
-        ax.add_patch(mpl.patches.Circle((0, 0), radius=allplanets[3]['RANGE'], ec=cols[3], fill=False))
-        ax.add_patch(mpl.patches.Circle((0, 0), radius=allplanets[4]['RANGE'], ec=cols[4], fill=False))
-        ax.add_patch(mpl.patches.Circle((0, 0), radius=allplanets[5]['RANGE'], ec=cols[5], fill=False))
-        ax.add_patch(mpl.patches.Circle((0, 0), radius=allplanets[6]['RANGE'], ec=cols[6], fill=False))
-        ax.add_patch(mpl.patches.Circle((0, 0), radius=allplanets[7]['RANGE'], ec=cols[7], fill=False))
+            pt.plot((allplanets[i]['HELRANGE']*np.cos(allplanets[i]['RA'])), (allplanets[i]['HELRANGE']*np.sin(allplanets[i]['RA'])), marker='o', color=cols[i], markeredgecolor='k', markersize=size3)
+            pt.plot([0,(allplanets[i]['HELRANGE']*np.cos(allplanets[i]['RA']))], [0, (allplanets[i]['HELRANGE']*np.sin(allplanets[i]['RA']))], marker='o', color=cols[i], markeredgecolor='k', markersize=0, linestyle='-')
+        ax.add_patch(mpl.patches.Circle((0, 0), radius=allplanets[0]['HELRANGE'], ec=cols[0], fill=False))
+        ax.add_patch(mpl.patches.Circle((0, 0), radius=allplanets[1]['HELRANGE'], ec=cols[1], fill=False))
+        ax.add_patch(mpl.patches.Circle((0, 0), radius=allplanets[2]['HELRANGE'], ec=cols[2], fill=False))
+        ax.add_patch(mpl.patches.Circle((0, 0), radius=allplanets[3]['HELRANGE'], ec=cols[3], fill=False))
+        ax.add_patch(mpl.patches.Circle((0, 0), radius=allplanets[4]['HELRANGE'], ec=cols[4], fill=False))
+        ax.add_patch(mpl.patches.Circle((0, 0), radius=allplanets[5]['HELRANGE'], ec=cols[5], fill=False))
+        ax.add_patch(mpl.patches.Circle((0, 0), radius=allplanets[6]['HELRANGE'], ec=cols[6], fill=False))
+        ax.add_patch(mpl.patches.Circle((0, 0), radius=allplanets[7]['HELRANGE'], ec=cols[7], fill=False))
 
     else:
         audist = 9
