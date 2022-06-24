@@ -73,8 +73,8 @@ def gen_ephem_today(date):
         print("Returning \"None\" and stopping.")
         return None
 
-    date_in = '{}-'.format(yyyy)+mm+'-{}'.format(dd)
-    date_next = '{}-'.format(yyyy)+mm+'-{}'.format(dd+1)
+    date_in = '{}-'.format(yyyy)+mm+'-{}'.format(dd)+' 00:01'
+    date_next = '{}-'.format(yyyy)+mm+'-{}'.format(dd)+' 23:59'
     # year_next = '{}-'.format(y+1)+mm+'-{}'.format(d)
 
 
