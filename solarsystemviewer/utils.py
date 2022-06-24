@@ -7,7 +7,7 @@ import matplotlib as mpl
 import pandas as pd
 import os
 
-def parseData(filelist):
+def parsedata(filelist):
     """ Parse Data
 
     Read and parse the relevant data from the Horizons@JPL (https://ssd.jpl.nasa.gov/horizons/app.html#/) curl command
@@ -93,7 +93,7 @@ def gen_ephem_today(date):
 
 # PlanetDist = np.array([0.39, 0.72, 1, 1.52, 5.20, 9.58, 19.20, 30.05])
 #Define cosine calculation function \n",
-def CosCalc(planetinfo):
+def coscalc(planetinfo):
     """ Cosine Angle Calculation
 
     Calculate the angle between earth-planet line and sun-planet line using cosine rules.
