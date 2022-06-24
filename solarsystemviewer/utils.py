@@ -39,10 +39,10 @@ def parseData(filelist):
             dataformatted.append(d)
 
         if f == 'earth':
-            datadict = {"RA":float(dataformatted[3]), "DEC":float(dataformatted[4]), "HELRANGE":float(dataformatted[7]), "EARTHRANGE":float(dataformatted[5])}
+            datadict = {"DATE":date,"RA":float(dataformatted[3]), "DEC":float(dataformatted[4]), "HELRANGE":float(dataformatted[7]), "EARTHRANGE":float(dataformatted[5])}
             allplanets.append(datadict)
         else:
-            datadict = {"RA":float(dataformatted[3]), "DEC":float(dataformatted[4]), "HELRANGE":float(dataformatted[5]), "EARTHRANGE":float(dataformatted[7])}
+            datadict = {"DATE":date,"RA":float(dataformatted[3]), "DEC":float(dataformatted[4]), "HELRANGE":float(dataformatted[5]), "EARTHRANGE":float(dataformatted[7])}
             allplanets.append(datadict)
 
     return allplanets
@@ -63,7 +63,7 @@ def gen_ephem_today(date):
     planets = [199,299,10,499,599,699,799,899]
     files = ['mercury','venus','earth','mars','jupiter','saturn','uranus','neptune']
     date_obs = date.split("-")
-    yyyy,mm,dd = int(date_obs[0]),date_obs[1],int(date_obs[2])
+    yyyy,mm,dd = int(date_obs[0]),str(date_obs[1]),int(date_obs[2])
     date_in = '{}-'.format(yyyy)+mm+'-{}'.format(dd)
     date_next = '{}-'.format(yyyy)+mm+'-{}'.format(dd+1)
     # year_next = '{}-'.format(y+1)+mm+'-{}'.format(d)
@@ -99,12 +99,12 @@ def CosCalc(planetinfo):
     Calculate the angle between earth-planet line and sun-planet line using cosine rules.
 
     Args:
-        planetinfo: Dictionary. The dictionary of ephemeris information from gen_ephem_today
-        ep(float): Number. The distance between the earth and the planet (labelled 'EARTHRANGE' in dictionary).
-        hp(float): Number. The distance between the sun and the planet (labelled 'HELRANGE' in dictionary). 
+        -planetinfo: Dictionary. The dictionary of ephemeris information from gen_ephem_today
     
     Returns: 
-        list: values of angle theta in radian 
+        Listed of values of angle theta in radian
+    Return type:
+        list 
 
     """
     theta_all = []
