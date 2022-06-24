@@ -60,10 +60,17 @@ def gen_ephem_today(date):
     Return Type:
         list
     '''
+
+
+
     planets = [199,299,10,499,599,699,799,899]
     files = ['mercury','venus','earth','mars','jupiter','saturn','uranus','neptune']
     date_obs = date.split("-")
     yyyy,mm,dd = int(date_obs[0]),str(date_obs[1]),int(date_obs[2])
+    if yyyy < 1 or yyyy > 9999:
+        print("Invalid date: year must be between 1 and 2500")
+        break
+
     date_in = '{}-'.format(yyyy)+mm+'-{}'.format(dd)
     date_next = '{}-'.format(yyyy)+mm+'-{}'.format(dd+1)
     # year_next = '{}-'.format(y+1)+mm+'-{}'.format(d)
