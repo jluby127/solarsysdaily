@@ -68,8 +68,9 @@ def gen_ephem_today(date):
     date_obs = date.split("-")
     yyyy,mm,dd = int(date_obs[0]),str(date_obs[1]),int(date_obs[2])
     if yyyy < 1 or yyyy > 9999:
-        print("Invalid date: year must be between 1 and 2500")
-        break
+        print("Invalid date: year must be between 1 and 9999")
+        print("Returning \"None\" and stopping.")
+        return None
 
     date_in = '{}-'.format(yyyy)+mm+'-{}'.format(dd)
     date_next = '{}-'.format(yyyy)+mm+'-{}'.format(dd+1)
