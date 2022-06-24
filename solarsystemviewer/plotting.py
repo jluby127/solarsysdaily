@@ -6,7 +6,7 @@ import numpy as np
 pt.rcParams['axes.facecolor']='k'
 
 
-def plotAll(allplanets, truedist=True):
+def plotAll(allplanets, thetas, truedist=True):
 
     '''
     The main plotting function. Formatted the same each time, this displays the relative positions of all the planets at the user inputted timestamp.
@@ -14,6 +14,7 @@ def plotAll(allplanets, truedist=True):
     Inputs:
         - allplanets (list of dictionaries) - Each planet gets a dictionary with its relevant information (JD, RA, DEC, RANGE),
                                               and each dictionary is stored in this list.
+        - thetas (list of floats) - Each planet's updated RA angle
         - truedist (boolean) - True if you want to see the true relative distances to the planets on the planet.
                                False if you want an evenly spaced system,
     Outupts:
@@ -35,8 +36,8 @@ def plotAll(allplanets, truedist=True):
     if truedist:
         audist = 32
         for i in range(len(allplanets)):
-            pt.plot((allplanets[i]['HELRANGE']*np.cos(allplanets[i]['RA'])), (allplanets[i]['HELRANGE']*np.sin(allplanets[i]['RA'])), marker='o', color=cols[i], markeredgecolor='k', markersize=size3)
-            pt.plot([0,(allplanets[i]['HELRANGE']*np.cos(allplanets[i]['RA']))], [0, (allplanets[i]['HELRANGE']*np.sin(allplanets[i]['RA']))], marker='o', color=cols[i], markeredgecolor='k', markersize=0, linestyle='-')
+            pt.plot((allplanets[i]['HELRANGE']*np.cos(thetas[i])), (allplanets[i]['HELRANGE']*np.sin(thetas[i])), marker='o', color=cols[i], markeredgecolor='k', markersize=size3)
+            pt.plot([0,(allplanets[i]['HELRANGE']*np.cos(thetas[i]))], [0, (allplanets[i]['HELRANGE']*np.sin(thetas[i]))], marker='o', color=cols[i], markeredgecolor='k', markersize=0, linestyle='-')
         ax.add_patch(mpl.patches.Circle((0, 0), radius=allplanets[0]['HELRANGE'], ec=cols[0], fill=False))
         ax.add_patch(mpl.patches.Circle((0, 0), radius=allplanets[1]['HELRANGE'], ec=cols[1], fill=False))
         ax.add_patch(mpl.patches.Circle((0, 0), radius=allplanets[2]['HELRANGE'], ec=cols[2], fill=False))
@@ -49,8 +50,8 @@ def plotAll(allplanets, truedist=True):
     else:
         audist = 9
         for i in range(len(allplanets)):
-            pt.plot((i+1)*np.cos(allplanets[i]['RA']), (i+1)*np.sin(allplanets[i]['RA']), marker='o', color=cols[i], markeredgecolor='k', markersize=size3)
-            pt.plot([0,(i+1)*np.cos(allplanets[i]['RA'])], [0, (i+1)*np.sin(allplanets[i]['RA'])], marker='o', color=cols[i], markeredgecolor='k', markersize=0, linestyle='-')
+            pt.plot((i+1)*np.cos(thetas[i]), (i+1)*np.sin(thetas[i]), marker='o', color=cols[i], markeredgecolor='k', markersize=size3)
+            pt.plot([0,(i+1)*np.cos(thetas[i])], [0, (i+1)*np.sin(thetas[i])], marker='o', color=cols[i], markeredgecolor='k', markersize=0, linestyle='-')
         ax.add_patch(mpl.patches.Circle((0, 0), radius=1, ec=cols[0], fill=False))
         ax.add_patch(mpl.patches.Circle((0, 0), radius=2, ec=cols[1], fill=False))
         ax.add_patch(mpl.patches.Circle((0, 0), radius=3, ec=cols[2], fill=False))
@@ -69,7 +70,7 @@ def plotAll(allplanets, truedist=True):
     pt.show()
 
 
-def plotinner(allplanets):
+def plotinner(allplanets, thetas):
 
     '''
      Args:
@@ -95,13 +96,13 @@ def plotinner(allplanets):
 
     audist = 6
     for i in range(len(allplanets)-3):
-        pt.plot((allplanets[i]['RANGE']*np.cos(allplanets[i]['RA'])), (allplanets[i]['RANGE']*np.sin(allplanets[i]['RA'])), marker='o', color=cols[i], markeredgecolor='k', markersize=size3)
-        pt.plot([0,(allplanets[i]['RANGE']*np.cos(allplanets[i]['RA']))], [0, (allplanets[i]['RANGE']*np.sin(allplanets[i]['RA']))], marker='o', color=cols[i], markeredgecolor='k', markersize=0, linestyle='-')
-    ax.add_patch(mpl.patches.Circle((0, 0), radius=allplanets[0]['RANGE'], ec=cols[0], fill=False))
-    ax.add_patch(mpl.patches.Circle((0, 0), radius=allplanets[1]['RANGE'], ec=cols[1], fill=False))
-    ax.add_patch(mpl.patches.Circle((0, 0), radius=allplanets[2]['RANGE'], ec=cols[2], fill=False))
-    ax.add_patch(mpl.patches.Circle((0, 0), radius=allplanets[3]['RANGE'], ec=cols[3], fill=False))
-    ax.add_patch(mpl.patches.Circle((0, 0), radius=allplanets[4]['RANGE'], ec=cols[4], fill=False))
+        pt.plot((allplanets[i]['HELRANGE']*np.cos(thetas[i])), (allplanets[i]['HELRANGE']*np.sin(thetas[i])), marker='o', color=cols[i], markeredgecolor='k', markersize=size3)
+        pt.plot([0,(allplanets[i]['HELRANGE']*np.cos(thetas[i]))], [0, (allplanets[i]['HELRANGE']*np.sin(thetas[i]))], marker='o', color=cols[i], markeredgecolor='k', markersize=0, linestyle='-')
+    ax.add_patch(mpl.patches.Circle((0, 0), radius=allplanets[0]['HELRANGE'], ec=cols[0], fill=False))
+    ax.add_patch(mpl.patches.Circle((0, 0), radius=allplanets[1]['HELRANGE'], ec=cols[1], fill=False))
+    ax.add_patch(mpl.patches.Circle((0, 0), radius=allplanets[2]['HELRANGE'], ec=cols[2], fill=False))
+    ax.add_patch(mpl.patches.Circle((0, 0), radius=allplanets[3]['HELRANGE'], ec=cols[3], fill=False))
+    ax.add_patch(mpl.patches.Circle((0, 0), radius=allplanets[4]['HELRANGE'], ec=cols[4], fill=False))
 
     ax.set_facecolor('k')
 
@@ -112,7 +113,7 @@ def plotinner(allplanets):
     pt.show()
 
 
-def plotouter(allplanets, date):
+def plotouter(allplanets, thetas):
 
     '''
     Only plot the outer 5 planets
@@ -140,13 +141,13 @@ def plotouter(allplanets, date):
 
     audist = 32
     for i in range(3, len(allplanets)):
-        pt.plot((allplanets[i]['RANGE']*np.cos(allplanets[i]['RA'])), (allplanets[i]['RANGE']*np.sin(allplanets[i]['RA'])), marker='o', color=cols[i], markeredgecolor='k', markersize=size3)
-        pt.plot([0,(allplanets[i]['RANGE']*np.cos(allplanets[i]['RA']))], [0, (allplanets[i]['RANGE']*np.sin(allplanets[i]['RA']))], marker='o', color=cols[i], markeredgecolor='k', markersize=0, linestyle='-')
-    ax.add_patch(mpl.patches.Circle((0, 0), radius=allplanets[3]['RANGE'], ec=cols[3], fill=False))
-    ax.add_patch(mpl.patches.Circle((0, 0), radius=allplanets[4]['RANGE'], ec=cols[4], fill=False))
-    ax.add_patch(mpl.patches.Circle((0, 0), radius=allplanets[5]['RANGE'], ec=cols[5], fill=False))
-    ax.add_patch(mpl.patches.Circle((0, 0), radius=allplanets[6]['RANGE'], ec=cols[6], fill=False))
-    ax.add_patch(mpl.patches.Circle((0, 0), radius=allplanets[7]['RANGE'], ec=cols[7], fill=False))
+        pt.plot((allplanets[i]['HELRANGE']*np.cos(thetas[i])), (allplanets[i]['HELRANGE']*np.sin(thetas[i])), marker='o', color=cols[i], markeredgecolor='k', markersize=size3)
+        pt.plot([0,(allplanets[i]['HELRANGE']*np.cos(thetas[i]))], [0, (allplanets[i]['HELRANGE']*np.sin(thetas[i]))], marker='o', color=cols[i], markeredgecolor='k', markersize=0, linestyle='-')
+    ax.add_patch(mpl.patches.Circle((0, 0), radius=allplanets[3]['HELRANGE'], ec=cols[3], fill=False))
+    ax.add_patch(mpl.patches.Circle((0, 0), radius=allplanets[4]['HELRANGE'], ec=cols[4], fill=False))
+    ax.add_patch(mpl.patches.Circle((0, 0), radius=allplanets[5]['HELRANGE'], ec=cols[5], fill=False))
+    ax.add_patch(mpl.patches.Circle((0, 0), radius=allplanets[6]['HELRANGE'], ec=cols[6], fill=False))
+    ax.add_patch(mpl.patches.Circle((0, 0), radius=allplanets[7]['HELRANGE'], ec=cols[7], fill=False))
 
     ax.set_facecolor('k')
 

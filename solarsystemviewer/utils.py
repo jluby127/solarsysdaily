@@ -7,7 +7,7 @@ import matplotlib as mpl
 import pandas as pd
 import os
 
-def parsedata(filelist):
+def parsedata(filelist, date):
     """ Parse Data
 
     Read and parse the relevant data from the Horizons@JPL (https://ssd.jpl.nasa.gov/horizons/app.html#/) curl command
@@ -15,7 +15,7 @@ def parsedata(filelist):
     Args:
         filelist (array of strings): an array where each element is the name of the file pulled from Horizons for the ith planet
 
-    Returns: 
+    Returns:
         allplanets-- A list of dictionaries with each planet's relevant information [RA, DEC, HELRANGE (Sun-Planet distance), EARTHRANGE (Earth-Planet distance)],and each dictionary is stored in this list.
     Return Type:
         list
@@ -52,10 +52,10 @@ def gen_ephem_today(date):
 
     Generates the equatorial coordinates and distance to a planet as observed from Earth, and its distance to the Sun.
 
-    Args: 
+    Args:
 	    date (string): Date to view the Solar System in YYYY-MM-DD format
 
-    Returns: 
+    Returns:
 	    parseData(files)
     Return Type:
         list
@@ -87,7 +87,7 @@ def gen_ephem_today(date):
         f.write(data)
         f.close()
 
-    return parseData(files)
+    return parsedata(files, date)
 
 
 
@@ -100,22 +100,28 @@ def coscalc(planetinfo):
 
     Args:
         -planetinfo: Dictionary. The dictionary of ephemeris information from gen_ephem_today
-    
-    Returns: 
+
+    Returns:
         Listed of values of angle theta in radian
     Return type:
-        list 
+        list
 
     """
     theta_all = []
-    for i in planetinfo: 
-        ep = i['EARTHRANGE']
-        hp = i['HELRANGE']
-        costop = (ep**2-1-hp**2)
-        cosbot = 2*hp
-        theta = np.arccos(costop/cosbot)
-        theta *= (180/np.pi)
-        theta_all.append(theta)
+    for i in range(len(planetinfo)):
+        if i == 2:
+            theta = planetinfo[i]['RA']*(180/np.pi)
+            theta_all.append(theta)
+        else:
+            ep = planetinfo[i]['EARTHRANGE']
+            hp = planetinfo[i]['HELRANGE']
+            costop = (ep**2-1-hp**2)
+            cosbot = 2*hp
+            if abs(costop/cosbot) > 1:
+                print("Error with ratio for planet: " + str(i))
+            theta = np.arccos(costop/cosbot)
+            theta *= (180/np.pi)
+            theta_all.append(theta)
     return theta_all
 
 
