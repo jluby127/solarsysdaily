@@ -21,6 +21,7 @@ def parsedata(filelist, date):
         list
     """
     allplanets = []
+    data = "temp holding string"
 
     for f in filelist:
         lines = []
