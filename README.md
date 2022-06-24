@@ -8,11 +8,11 @@ pip install solarsysdaily
 # How to use:
 In a python file or jupyter notebook:
 
-from solarsysdaily import utils
-from solarsysdaily import plotting
-date = "2000-01-01"
-planetdata = utils.gen_ephem_today(date)
-angles = utils.coscalc(planetdata)
-plotting.plotAll(planetdata, angles, truedist=False)
+from solarsysdaily import utils \n
+from solarsysdaily import plotting \n
+date = "2000-01-01" \n
+planetdata = utils.gen_ephem_today(date) \n
+angles = utils.coscalc(planetdata) \n
+plotting.plotAll(planetdata, angles, truedist=False) \n
 
 A plot window will launch, enjoy!
