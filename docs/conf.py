@@ -12,18 +12,18 @@
 #
 import os
 import sys
-sys.path.insert(0, os.path.abspath('../solarsystemviewer'))
+sys.path.insert(0, os.path.abspath('../solarsysdaily'))
 
 
 # -- Project information -----------------------------------------------------
 
-project = 'SolarSystemViewer'
-copyright = '2022, Jack Lubin, Maria Vincent, Eulrika Wu'
-author = 'Jack Lubin, Maria Vincent, Eulrika Wu'
+project = 'solarsysdaily'
+copyright = '2022, Jack Lubin, Maria Vincent, and Eulrika Wu'
+author = 'Jack Lubin, Maria Vincent, and Eulrika Wu'
 root_doc = 'index'
 
 # The full version, including alpha/beta/rc tags
-release = '1.0.0'
+release = '1.0.3'
 
 
 # -- General configuration ---------------------------------------------------
