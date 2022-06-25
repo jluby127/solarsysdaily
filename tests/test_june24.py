@@ -1,9 +1,6 @@
-# End to end test of solarsystemviewer
-import sys
-import os
-sys.path.append("../solarsystemviewer/")
-import utils as ut
-import plotting as pt
+import solarsysdaily
+from solarsysdaily import utils as ut
+from solarsysdaily import plotting as pt
 
 def end2end(date):
 
