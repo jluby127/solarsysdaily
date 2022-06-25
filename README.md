@@ -1,4 +1,4 @@
-# solsysdail- A Solar System Viewing Tool.
+# solsysdaily- A Solar System Viewing Tool.
 [![A rectangular badge, half black half purple containing the text made at Code Astro](https://img.shields.io/badge/Made%20at-Code/Astro-blueviolet.svg)](https://semaphorep.github.io/codeastro/)
 
 Team project from CodeAstro22 (Team #39): Visualizing the solar system at any given time.<br/>
@@ -22,7 +22,7 @@ plotting.plotAll(planetdata, angles, truedist=False)<br/>
 
 A plot window will launch, enjoy!
 
-Detailed documentation can be found [here](https://solar-system-viewer.readthedocs.io/en/latest/)
+Detailed documentation can be found [here](https://solar-system-viewer.readthedocs.io/en/latest/).
 
 
 
