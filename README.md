@@ -7,18 +7,21 @@ With only a calendar date input as a string in the format YYYY-MM-DD, you can ge
 A future version will include an animation to show how the planets have moved/will move over one Earth year from the given date, and a random history fact for the day entered (since this is random, it may be an event that may not have happened before the year you entered)
 
 ## How to install:
-`pip install solarsysdaily`
+```
+pip install solarsysdaily
+```
 
 ## How to use:
 In a python file or jupyter notebook:
-
-`import solarsysdaily #this will generate a secret message`<br/>
-`from solarsysdaily import utils`<br/>
-`from solarsysdaily import plotting`<br/>
-`date = "2000-01-01"` <br/>
-`planetdata = utils.gen_ephem_today(date)`<br/>
-`angles = utils.coscalc(planetdata)`<br/>
-`plotting.plotAll(planetdata, angles, truedist=False)`<br/>
+```
+import solarsysdaily #this will generate a secret message
+from solarsysdaily import utils
+from solarsysdaily import plotting
+date = "2000-01-01" #this is just an example date
+planetdata = utils.gen_ephem_today(date)
+angles = utils.coscalc(planetdata)
+plotting.plotAll(planetdata, angles, truedist=False)
+```
 
 A plot window will launch, enjoy!
 
