@@ -73,9 +73,10 @@ def plotAll(allplanets, thetas, truedist=True):
 def plotinner(allplanets, thetas):
 
     '''
-     Args:
-        allplanets (list of dictionaries) - Each planet gets a dictionary with its relevant information (JD, RA, DEC, RANGE),
-                                              and each dictionary is stored in this list.
+    Args:
+        -allplanets: List of dictionaries. Each planet gets a dictionary with its relevant information (JD, RA, DEC, RANGE),
+                    and each dictionary is stored in this list.
+        -thetas: List of angles generated using utils.coscalc
 
     Return:
         None
@@ -109,7 +110,7 @@ def plotinner(allplanets, thetas):
     pt.xlim(-audist, audist)
     pt.ylim(-audist, audist)
 
-    pt.title(date, fontsize=size2*2)
+    pt.title('Terrestrial planets on '+date, fontsize=18)
     pt.show()
 
 
@@ -119,8 +120,9 @@ def plotouter(allplanets, thetas):
     Only plot the outer 5 planets
 
     Args:
-        allplanets (list of dictionaries) - Each planet gets a dictionary with its relevant information (JD, RA, DEC, RANGE),
-                                              and each dictionary is stored in this list.
+        -allplanets: List of dictionaries. Each planet gets a dictionary with its relevant information (JD, RA, DEC, RANGE),
+                    and each dictionary is stored in this list.
+        -thetas: List of angles generated using utils.coscalc
 
     Return:
         None
@@ -154,5 +156,5 @@ def plotouter(allplanets, thetas):
     pt.xlim(-audist, audist)
     pt.ylim(-audist, audist)
 
-    pt.title(date, fontsize=size2*2)
+    pt.title('Mars `&` Gas Giants on '+date, fontsize=18)
     pt.show()
